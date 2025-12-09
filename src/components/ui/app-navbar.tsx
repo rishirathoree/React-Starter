@@ -1,16 +1,10 @@
 import React, { useId } from "react";
 import {
   Bell,
-  BoltIcon,
-  BookOpenIcon,
   BrickWall,
   Cog,
-  Layers2Icon,
   LogOutIcon,
-  PinIcon,
-  Receipt,
   User,
-  UserPenIcon,
   Users,
 } from "lucide-react";
 

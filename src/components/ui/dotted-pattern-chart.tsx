@@ -10,14 +10,13 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import {
-  ChartConfig,
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
+  type ChartConfig,
 } from "@/components/ui/chart";
 import { Badge } from "@/components/ui/badge";
 import { TrendingUp } from "lucide-react";
-import React from "react";
 
 const chartData = [
   { month: "January", desktop: 342, mobile: 245 },
