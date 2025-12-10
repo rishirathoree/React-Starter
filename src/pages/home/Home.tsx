@@ -1,6 +1,5 @@
 import { lazy,  } from "react";
 import { Link } from "react-router";
-const Stats01 = lazy(() => import("./subcomps/Cards"));
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -8,6 +7,7 @@ import {
   BreadcrumbList,
 } from "@/components/ui/breadcrumb";
 import TableFloat from "../catalogue/subcomps/Table";
+import { DottedPatternAreaChart } from "../meters/subcomps/dotted-chart";
 
 const Home = () => {
   return (
@@ -19,7 +19,11 @@ const Home = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-      <Stats01 />
+<div className='grid grid-cols-2 gap-2'>
+                {Array.from({ length: 2 }).map((_, index) => (
+                    <DottedPatternAreaChart key={index} />
+                ))}
+            </div>
       <TableFloat />
     </div>
   );

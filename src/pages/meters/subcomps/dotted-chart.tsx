@@ -49,7 +49,7 @@ export function DottedPatternAreaChart() {
     <Card className="shadow-none border-0">
       <CardHeader>
         <CardTitle>
-          Dotted Area Chart
+          Meter Reading
           <Badge
             variant="outline"
             className="text-green-500 bg-green-500/10 border-none ml-2"
