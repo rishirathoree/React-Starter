@@ -1,17 +1,5 @@
 "use client";
-
-import {
-  CheckCircle,
-  FileTextIcon,
-  Loader2,
-  PauseIcon,
-  PlayIcon,
-  Trash2Icon,
-} from "lucide-react";
-import {  useState } from "react";
-
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 import {
   Table,
   TableBody,
@@ -36,8 +24,6 @@ interface Task {
   dueDate: string;
   notes: string;
 }
-
-type TaskActionType = "start" | "pause" | "complete" | "delete" | "view";
 
 const tasks: Task[] = [
   {
@@ -356,31 +342,7 @@ function getStatusBadge(status: Task["status"]) {
 }
 
 const TableFloat: React.FC = () => {
-  const [pendingAction, setPendingAction] = useState<{
-    id: string;
-    type: TaskActionType;
-  } | null>(null);
-
-  const isTaskActionPending = (action: TaskActionType, taskId: string) =>
-    pendingAction?.id === taskId && pendingAction.type === action;
-
-  const isTaskBusy = (taskId: string) => pendingAction?.id === taskId;
-
-  const handleAction = (task: Task, actionType: TaskActionType) => {
-    setPendingAction({ id: task.id, type: actionType });
-    setTimeout(() => {
-      setPendingAction(null);
-      console.log(`Action "${actionType}" completed for task:`, task.title);
-    }, 1000);
-  };
-
   const renderTaskRow = (task: Task) => {
-    const busy = isTaskBusy(task.id);
-    const startPending = isTaskActionPending("start", task.id);
-    const pausePending = isTaskActionPending("pause", task.id);
-    const completePending = isTaskActionPending("complete", task.id);
-    const deletePending = isTaskActionPending("delete", task.id);
-
     return (
       <TableRow key={task.id} className="hover:bg-muted/50 divide-x ring-0 border-0 shadow-none">
         <TableCell className="px-4 font-medium">{task.title}</TableCell>
@@ -404,104 +366,6 @@ const TableFloat: React.FC = () => {
             </Tooltip>
           </TooltipProvider>
         </TableCell>
-        <TableCell className="px-4">
-          <TooltipProvider>
-            <div className="flex items-center gap-1">
-              {(task.status === "pending" || task.status === "blocked") && (
-                <Tooltip>
-                  <TooltipTrigger asChild>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="h-8 w-8"
-                      onClick={() => handleAction(task, "start")}
-                      disabled={busy}
-                    >
-                      {startPending ? (
-                        <Loader2 className="size-4 animate-spin" />
-                      ) : (
-                        <PlayIcon className="size-4" />
-                      )}
-                    </Button>
-                  </TooltipTrigger>
-                  <TooltipContent>Start</TooltipContent>
-                </Tooltip>
-              )}
-              {task.status === "in-progress" && (
-                <>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => handleAction(task, "pause")}
-                        disabled={busy}
-                      >
-                        {pausePending ? (
-                          <Loader2 className="size-4 animate-spin" />
-                        ) : (
-                          <PauseIcon className="size-4" />
-                        )}
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>Pause</TooltipContent>
-                  </Tooltip>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="h-8 w-8"
-                        onClick={() => handleAction(task, "complete")}
-                        disabled={busy}
-                      >
-                        {completePending ? (
-                          <Loader2 className="size-4 animate-spin" />
-                        ) : (
-                          <CheckCircle className="size-4" />
-                        )}
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent>Complete</TooltipContent>
-                  </Tooltip>
-                </>
-              )}
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8 text-destructive hover:bg-destructive hover:text-white"
-                    onClick={() => handleAction(task, "delete")}
-                    disabled={busy}
-                  >
-                    {deletePending ? (
-                      <Loader2 className="size-4 animate-spin" />
-                    ) : (
-                      <Trash2Icon className="size-4" />
-                    )}
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>Delete</TooltipContent>
-              </Tooltip>
-              <Tooltip>
-                <TooltipTrigger asChild>
-                  <Button
-                    variant="outline"
-                    size="icon"
-                    className="h-8 w-8"
-                    onClick={() => handleAction(task, "view")}
-                    disabled={busy}
-                  >
-                    <FileTextIcon className="size-4" />
-                  </Button>
-                </TooltipTrigger>
-                <TooltipContent>View Details</TooltipContent>
-              </Tooltip>
-            </div>
-          </TooltipProvider>
-        </TableCell>
       </TableRow>
     );
   };
@@ -519,9 +383,6 @@ const TableFloat: React.FC = () => {
 
             <TableHead className="px-4 font-medium">Due Date</TableHead>
             <TableHead className="px-4 font-medium w-[80px]">Notes</TableHead>
-            <TableHead className="px-4 font-medium w-[180px]">
-              Actions
-            </TableHead>
           </TableRow>
         </TableHeader>
         <TableBody className="!divide-y">{tasks.map(renderTaskRow)}</TableBody>

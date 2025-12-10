@@ -9,7 +9,6 @@ import {
 } from "@/components/ui/breadcrumb";
 import TableFloat from "../catalogue/subcomps/Table";
 
-
 const Home = () => {
   return (
     <div className="space-y-4 py-4">
