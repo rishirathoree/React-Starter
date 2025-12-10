@@ -345,7 +345,17 @@ const TableFloat: React.FC = () => {
   const renderTaskRow = (task: Task) => {
     return (
       <TableRow key={task.id} className="hover:bg-muted/50 divide-x ring-0 border-0 shadow-none">
-        <TableCell className="px-4 font-medium">{task.title}</TableCell>
+        <TableCell
+          contentEditable
+          suppressContentEditableWarning
+          className="focus-visible:outline-none px-4 font-medium focus-visible:bg-muted cursor-pointer"
+          onBlur={(e) => {
+            const newValue = e.currentTarget.textContent || "";
+            console.log("Updated value:", newValue);
+          }}
+        >
+          {task.title}
+        </TableCell>
         <TableCell className="px-4 text-sm text-muted-foreground">
           {task.assignee}
         </TableCell>
