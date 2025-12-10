@@ -18,11 +18,11 @@ const Home = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
-<div className='grid grid-cols-2 gap-2'>
-                {Array.from({ length: 2 }).map((_, index) => (
-                    <DottedPatternAreaChart key={index} />
-                ))}
-            </div>
+      <div className='grid grid-cols-2 gap-2'>
+        {Array.from({ length: 2 }).map((_, index) => (
+          <DottedPatternAreaChart key={index} />
+        ))}
+      </div>
       <TableFloat />
     </div>
   );
