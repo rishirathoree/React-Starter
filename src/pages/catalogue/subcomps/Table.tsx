@@ -346,7 +346,7 @@ const TableFloat: React.FC = () => {
     return (
       <TableRow key={task.id} className="hover:bg-muted/50 divide-x ring-0 border-0 shadow-none">
         <TableCell
-          contentEditable
+          contentEditable={"plaintext-only"}
           suppressContentEditableWarning
           className="focus-visible:outline-none px-4 font-medium focus-visible:bg-muted cursor-pointer"
           onBlur={(e) => {
