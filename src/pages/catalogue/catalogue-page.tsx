@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Link } from 'react-router';
 import Filter from './subcomps/Filter';
+
 const Catalouge: React.FC = () => {
     return (
     <div className="space-y-4 py-4">
@@ -25,6 +26,9 @@ const Catalouge: React.FC = () => {
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+
+
+            
       <div>
         <Filter />
       </div>

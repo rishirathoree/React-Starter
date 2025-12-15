@@ -17,23 +17,45 @@ import {
     MenuTrigger,
 } from "@/components/ui/menu";
 import { Input } from "@/components/ui/input";
+import {
+    ArrowLeftIcon,
+} from "lucide-react"
+import { ButtonGroup } from "@/components/ui/button-group"
+import CreateModal from "./create-modal";
 
 export default function Filter() {
     return (
         <div className="flex items-center gap-2 justify-between">
-            <div className="col-span-full sm:col-span-3">
-                <Input
-                    type="text"
-                    id="first-name"
-                    name="first-name"
-                    placeholder="Search catalogue"
-                    className="w-80  focus-visible:ring-0" />
+
+
+            <div className='flex items-center justify-between w-full'>
+                <ButtonGroup>
+                    <ButtonGroup className="hidden sm:flex">
+                        <Button variant="outline" size="icon" aria-label="Go Back">
+                            <ArrowLeftIcon />
+                        </Button>
+                    </ButtonGroup>
+                    <div className="col-span-full sm:col-span-3">
+                        <Input
+                            type="text"
+                            id="first-name"
+                            name="first-name"
+                            placeholder="Search catalogue"
+                            className="w-80  focus-visible:ring-0" />
+                    </div>
+                </ButtonGroup>
             </div>
 
             <div className="flex items-center gap-2 ">
+                <CreateModal />
                 <Menu>
-                    <MenuTrigger render={<Button size={"sm"} variant="secondary" />}><FilterIcon /> Sort</MenuTrigger>
-                    <MenuPopup align="start">
+                    <MenuTrigger render={
+                            <Button autoFocus variant="outline">
+                                <FilterIcon />
+                                Filter
+                            </Button>
+                    }><FilterIcon /> Sort</MenuTrigger>
+                    <MenuPopup align="end">
                         <MenuGroup>
                             <MenuGroupLabel>Status</MenuGroupLabel>
                             <MenuRadioGroup>
@@ -59,6 +81,7 @@ export default function Filter() {
                     </MenuPopup>
                 </Menu>
             </div>
+
         </div>
     );
 }
